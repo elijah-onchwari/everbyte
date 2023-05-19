@@ -74,5 +74,5 @@ jobs:
             #       docker push registry.digitalocean.com/ever/gauzy-api:latest
             - name: Push to Github Registry
               run: |
-                  docker push ghcr.io/ever-co/gauzy-api:latest
+                  docker push ghcr.io/everbyte/api:latest
     
