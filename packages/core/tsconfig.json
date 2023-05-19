@@ -1,0 +1,41 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"declaration": true,
+		"sourceMap": true,
+		"baseUrl": "./src",
+		"rootDir": "./src",
+		"outDir": "./dist",
+		"types": [
+			"node",
+			"reflect-metadata",
+			"jest"
+		],
+		"paths": {
+			"@core/*": [
+				"core/*"
+			],
+			"@database/*": [
+				"database/*"
+			],
+			"@modules/*": [
+				"modules/*"
+			],
+			"@shared/*": [
+				"shared/*"
+			],
+			"@providers/*": [
+				"providers/*"
+			],
+			"rxjs": [
+				"node_modules/rxjs"
+			],
+			"rxjs/*": [
+				"node_modules/rxjs/*"
+			]
+		}
+	},
+	"include": [
+		"./src/**/*"
+	]
+}

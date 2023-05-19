@@ -1,0 +1,49 @@
+{
+	"name": "everbyte",
+	"private": true,
+	"workspaces": {
+		"packages": [
+			"packages/*",
+			"apps/*"
+		]
+	},
+	"scripts": {
+		"4096": "NODE_OPTIONS=--max_old_space_size=4096",
+		"7000": "NODE_OPTIONS=--max_old_space_size=7000",
+		"8192": "NODE_OPTIONS=--max_old_space_size=8192",
+		"nx": "yarn dev &&  yarn 8192 nx",
+		"nx:prod": "yarn prod && yarn 8192 nx",
+		"nx:ci": "yarn prod && yarn 7000 nx",
+		"start": "yarn build:all && yarn concurrently --raw --kill-others \"yarn start:api\"",
+		"start:api": "yarn nx serve api",
+		"start:everbyte": "yarn run postinstall.web && yarn run config:dev && yarn nx serve everbyte --open",
+		"start:api:core": "yarn core:start:api",
+		"build:all": " yarn 4096 && lerna run build",
+		"build:contracts": "yarn dev && yarn 4096 && lerna run build --scope=@everbyte/contracts ",
+		"build:common": "yarn dev && yarn 4096 && lerna run build --scope=@everbyte/common",
+		"build:config": " yarn dev && yarn 4096 && lerna run build --scope=@everbyte/config ",
+		"build:core": "yarn dev && yarn 4096 && lerna run build --scope=@everbyte/core",
+		"build:api:prod": "yarn nx:prod build api -c=production --prod",
+		"postinstall.web": "yarn node ./decorate-angular-cli.js && npx ngcc --properties es2016 browser module main --first-only --create-ivy-entry-points && yarn node tools/web/postinstall",
+		"start-up": "yarn install && yarn lerna bootstrap",
+		"migration:run": " yarn build:packages && yarn run config:dev && yarn migration:file migration:run",
+		"migration:revert": "yarn dev && yarn 8192 && yarn build:packages && yarn run config:dev && yarn migration:file migration:revert",
+		"migration:generate": "yarn dev && yarn 8192 && yarn build:packages && yarn run config:dev && yarn migration:file migration:generate",
+		"migration:create": "yarn dev && yarn 8192 && yarn build:packages && yarn run config:dev && yarn migration:file migration:create",
+		"migration:file": "yarn ts-node -r tsconfig-paths/register --project apps/api/tsconfig.app.json ./apps/api/src/migration.ts",
+		"config": "yarn ts-node ./.scripts/config.ts",
+		"config:dev": "yarn config --environment=dev",
+		"config:prod": "yarn config --environment=prod",
+		"prepare:husky": "npx husky install .husky",
+		"dev": "cross-env NODE_ENV=development",
+		"prod": "cross-env NODE_ENV=production"
+	},
+	"devDependencies": {
+		"@nx/nest": "^16.1.3",
+		"@nx/node": "16.1.3",
+		"@nx/webpack": "16.1.3",
+		"cross-env": "^7.0.3",
+		"lerna": "^6.6.2",
+		"nx": "^16.1.1"
+	}
+}

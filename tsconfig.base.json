@@ -1,0 +1,56 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": true,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "commonjs",
+		"lib": ["es2017", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"removeComments": true,
+		"allowSyntheticDefaultImports": true,
+		"outDir": "./dist/out-tsc",
+		"esModuleInterop": true,
+
+		// "strictNullChecks": false,
+		// "noImplicitAny": false,
+		// "strictBindCallApply": false,
+		// "forceConsistentCasingInFileNames": false,
+		// "noFallthroughCasesInSwitch": false,
+
+		// "resolveJsonModule": true,
+		// "preserveConstEnums": true,
+		// "noUnusedLocals": false,
+		// "esModuleInterop": true,
+		"paths": {
+			"@modules/*": [
+				"packages/core/src/modules/*"
+			],
+			"@core/*": [
+				"packages/core/src/core/*"
+			],
+			"@database/*": [
+				"packages/core/src/database/*"
+			],
+			"@shared/*": [
+				"packages/core/src/shared/*"
+			],
+			"@providers/*": [
+				"packages/core/src/providers/*"
+			],
+			
+			"@everbyte/common": ["packages/common/src/index.ts"],
+			"@everbyte/config": ["packages/config/src/index.ts"],
+			"@everbyte/core": ["packages/core/src/index.ts"],
+			"@everbyte/contracts": ["packages/interfaces/src/index.ts"],
+		}
+	},
+	"exclude": ["coverage/**/*", "dist/**/*", "node_modules", "tmp"]
+}

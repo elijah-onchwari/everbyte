@@ -1,0 +1,28 @@
+{
+	"name": "@everbyte/common",
+	"version": "0.0.0",
+	"description": "> TODO: description",
+	"author": "Elijah Onchwari <elijah.ndege.onchwari@gmail.com>",
+	"homepage": "https://github.com/elijah-onchwari/everbyte#readme",
+	"license": "ISC",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"directories": {
+		"lib": "dist",
+		"test": "__tests__"
+	},
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"access": "restricted"
+	},
+	"scripts": {
+		"build": "rimraf dist && yarn run compile",
+		"compile": "tsc -p tsconfig.build.json"
+	},
+	"devDependencies": {
+		"ts-node": "^10.9.1",
+		"typescript": "4.8.4"
+	}
+}
