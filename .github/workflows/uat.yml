@@ -1,8 +1,8 @@
-name: Build and Publish Docker Images Prod
+name: Api [PROD]
 
 on:
     push:
-        branches: main
+        branches: uat
 
 jobs:
     everbyte-api:
