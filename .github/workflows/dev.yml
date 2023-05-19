@@ -57,7 +57,7 @@ jobs:
                   load: true
                   platforms: linux/amd64
                   tags: |
-                      ghcr.io/everbyte/api:latest
+                      ghcr.io/${{ github.actor }}/everbyte_api:latest
                       everbyte/api:latest
                       registry.digitalocean.com/everbyte/api:latest
                   cache-from: type=registry,ref=everbyte/api:latest
@@ -74,5 +74,5 @@ jobs:
             #       docker push registry.digitalocean.com/ever/gauzy-api:latest
             - name: Push to Github Registry
               run: |
-                  docker push ghcr.io/everbyte/api:latest
+                  docker push ghcr.io/${{ github.actor }}/everbyte_api:latest
     
