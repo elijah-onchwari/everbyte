@@ -16,6 +16,7 @@ steps:
        terraform version
 
        echo "-==Change the working directory ==-"
+       ls
        cd  /.google
 
        echo "-== INIT TF ==-"
