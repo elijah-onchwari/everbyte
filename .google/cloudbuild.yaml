@@ -16,7 +16,7 @@ steps:
        terraform version
 
        echo "-==Change the working directory ==-"
-       cd  /workspace/terraform
+       cd  /.google
 
        echo "-== INIT TF ==-"
        terraform init -backend-config=backend.conf -reconfigure \
