@@ -23,6 +23,6 @@ steps:
        && terraform plan -var-file=./input.tfvars -out=./tfplan -lock=true \
        && terraform apply -auto-approve
     env:
-      - 'CLOUDSDK_CORE_PROJECT=<GCP Project Name>'
+      - 'CLOUDSDK_CORE_PROJECT=geczra-380202'
 options:
   logging: CLOUD_LOGGING_ONLY
