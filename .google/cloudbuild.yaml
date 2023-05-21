@@ -1,9 +1,6 @@
 steps:
-  - id: installPackage
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: "bash"
-    waitFor: 
-    - preRequisites
     args: 
     - "-c"
     -  |
