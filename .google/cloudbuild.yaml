@@ -17,7 +17,7 @@ steps:
 
        echo "-==Change the working directory ==-"
        ls
-       cd  /.google
+       cd .google
 
        echo "-== INIT TF ==-"
        terraform init -backend-config=backend.conf -reconfigure \
