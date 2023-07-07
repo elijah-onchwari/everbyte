@@ -1,6 +1,6 @@
 import { existsSync, readFile, writeFile } from 'fs';
 import { dirname } from 'path';
-import mkdirp from 'mkdirp';
+import {mkdirp} from 'mkdirp';
 
 /**
  * Migration utils functions.
