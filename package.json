@@ -17,7 +17,7 @@
 		"start": "yarn build:all && yarn concurrently --raw --kill-others \"yarn start:api\"",
 		"start:api": "yarn nx serve api",
 		"start:everbyte": "yarn run postinstall.web && yarn run config:dev && yarn nx serve everbyte --open",
-		"start:api:core": "yarn core:start:api",
+		"start:api:core": "yarn dev && yarn 4096 yarn --cwd ./packages/core start:dev",
 		"build:all": " yarn 4096 && lerna run build",
 		"build:contracts": "yarn dev && yarn 4096 && lerna run build --scope=@everbyte/contracts ",
 		"build:common": "yarn dev && yarn 4096 && lerna run build --scope=@everbyte/common",

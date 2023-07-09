@@ -28,12 +28,13 @@ LABEL maintainer="Elijah Onchwari <elijah@everbyte.co>" \
       description="Everbyte project" \
       vendor="Everbyte Inc." 
 
-RUN npm i -g npm \
+RUN apk add --no-cache --virtual .gyp python3 make g++ \
+    && npm i --location=global npm \
     && npm install yarn -g --force \
     && mkdir /srv/everbyte && chown -R node:node /srv/everbyte
 
-COPY wait .deploy/api/entrypoint.prod.sh .deploy/api/entrypoint.compose.sh /
-RUN chmod +x /wait /entrypoint.compose.sh /entrypoint.prod.sh && dos2unix /entrypoint.prod.sh && dos2unix /entrypoint.compose.sh
+COPY wait .deploy/api/entrypoint.prod.sh .deploy/api/entrypoint.compose.sh ./
+RUN chown node:node wait && chmod +x /wait /entrypoint.compose.sh /entrypoint.prod.sh && dos2unix /entrypoint.prod.sh && dos2unix /entrypoint.compose.sh
 
 USER node:node
 
@@ -87,15 +88,16 @@ RUN yarn install --network-timeout 1000000 --frozen-lockfile --production && yar
 #####################################################################################################
 FROM node:18-alpine3.16 AS development
 
-USER node:node
-
 WORKDIR /srv/everbyte
-
-COPY --chown=node:node --from=devDependencies /wait /entrypoint.prod.sh /entrypoint.compose.sh /
+ 
 COPY --chown=node:node --from=devDependencies /srv/everbyte .
-COPY . .
+COPY --chown=node:node . .
 
+RUN mkdir /import && chown node:node /import && \
+	touch ormlogs.log && chown node:node ormlogs.log && chown node:node wait && \
+	chmod +x wait entrypoint.compose.sh entrypoint.prod.sh 
 
+USER node:node
 
 ######################################################################################################
 ############################### BUILD ###################################################

@@ -59,6 +59,8 @@ services:
         image: everbyte-api:latest
         build:
             context: .
+            # target: productions
+            target: development
             dockerfile: .deploy/api/Dockerfile
             args:
                 NODE_ENV: ${NODE_ENV:-development}
@@ -70,11 +72,14 @@ services:
             TYPEORM_HOST: db
             APP_URL: ${APP_URL:-http://localhost:3000}
             CLIENT_URL: ${CLIENT_URL:-http://localhost:4200}
-
+        # section enables the data to be persisted and is what makes the hot reloading possible.
+        volumes:
+            - .:/srv/everbyte
         env_file:
             - .env.docker.compose
-        entrypoint: './entrypoint.compose.sh'
-        command: ['node', 'main.js']
+        entrypoint: ['/bin/sh','entrypoint.compose.sh']
+        # command: ['node', 'main.js']
+        command: yarn start:api:core
         restart: on-failure
         depends_on:
             db:

@@ -13,6 +13,7 @@ import { coreEntities } from './database/entities';
 import { coreSubscribers } from './database/subscribers';
 import { EntitySchema, EntitySubscriberInterface } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 export async function bootstrap() {
 	await updateConfigs();
 	const app = await NestFactory.create(AppModule);
@@ -24,19 +25,28 @@ export async function bootstrap() {
 	const dataSourceOptions = {
 		...configs.dataSourceOptions
 	} as unknown as PostgresConnectionOptions;
+
+	const options = new DocumentBuilder()
+	.setTitle('Everbyte API')
+	.setVersion('1.0')
+	.addBearerAuth()
+	.build();
+
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('doc', app, document);
+
 	await app.listen(configs.port, () => {
 		Logger.log(' ');
-		Logger.log('Listening at  http://localhost:' + configs.port);
-		Logger.log(`Environment     : ${environment}`);
+		Logger.log('Listening at    : http://localhost:' + configs.port);
+		Logger.log(`Environment     : ${environment} mode`);
 		Logger.log(' ');
 		Logger.log(`Postgres Host   : ${dataSourceOptions.host}`);
 		Logger.log(`Postgres Port   : ${dataSourceOptions.port}`);
 		Logger.log(`Postgres DbName : ${dataSourceOptions.database}`);
 		Logger.log(' ');
 		Logger.log(
-			`Redis Host : ${configs.redisOptions.host}:${configs.redisOptions.port}`
+			`Redis Host      : ${configs.redisOptions.host}:${configs.redisOptions.port}`
 		);
-		Logger.log(`Running in ${environment} mode`);
 	});
 	return app;
 }
