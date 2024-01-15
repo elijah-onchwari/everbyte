@@ -42,7 +42,7 @@ export async function bootstrap() {
 		Logger.log(' ');
 		Logger.log(`Postgres Host   : ${dataSourceOptions.host}`);
 		Logger.log(`Postgres Port   : ${dataSourceOptions.port}`);
-		Logger.log(`Postgres DbName : ${dataSourceOptions.database}`);
+		Logger.log(`Postgres DatabaseName : ${dataSourceOptions.database}`);
 		Logger.log(' ');
 		Logger.log(
 			`Redis Host      : ${configs.redisOptions.host}:${configs.redisOptions.port}`
