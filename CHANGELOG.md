@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/elijah-onchwari/everbyte/compare/v0.1.5...v0.1.6) (2024-02-20)
+
+
+### Bug Fixes
+
+* Update Docker push command ([e8af709](https://github.com/elijah-onchwari/everbyte/commit/e8af70994a928df6691e933bb2727b3baf9e5d43))
+
 ## [0.1.5](https://github.com/elijah-onchwari/everbyte/compare/v0.1.4...v0.1.5) (2024-02-20)
 
 
