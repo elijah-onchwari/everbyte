@@ -26,14 +26,14 @@
 		"build:api:prod": "yarn nx:prod build api -c=production --prod",
 		"postinstall.web": "yarn node ./decorate-angular-cli.js && npx ngcc --properties es2016 browser module main --first-only --create-ivy-entry-points && yarn node tools/web/postinstall",
 		"start-up": "yarn install && yarn lerna bootstrap",
-		"migration:run": " yarn build:all && yarn config:dev && yarn run migration:file",
+		"migration:run": " yarn build:all && yarn run config:dev && yarn run migration:file migration:run",
 		"migration:revert": "yarn dev && yarn 8192 && yarn build:packages && yarn run config:dev && yarn migration:file migration:revert",
 		"migration:generate": "yarn dev && yarn 8192 && yarn build:packages && yarn run config:dev && yarn migration:file migration:generate",
 		"migration:create": "yarn dev && yarn 8192 && yarn build:packages && yarn run config:dev && yarn migration:file migration:create",
 		"migration:file": "yarn ts-node -r tsconfig-paths/register --project apps/api/tsconfig.app.json ./apps/api/src/migration.ts",
 		"config": "yarn ts-node ./.script/configure.ts",
-		"config:dev": "yarn config --environment=dev",
-		"config:prod": "yarn config --environment=prod",
+		"config:dev": "yarn run config --environment=dev",
+		"config:prod": "yarn run config --environment=prod",
 		"prepare:husky": "npx husky install .husky",
 		"dev": "cross-env NODE_ENV=development",
 		"prod": "cross-env NODE_ENV=production"
@@ -47,6 +47,7 @@
 		"nx": "^18.0.4"
 	},
 	"dependencies": {
-		"concurrently": "^8.2.2"
+		"concurrently": "^8.2.2",
+		"envalid": "^8.0.0"
 	}
 }

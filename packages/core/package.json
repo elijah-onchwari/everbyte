@@ -54,7 +54,7 @@
 		"reflect-metadata": "^0.2.1",
 		"rimraf": "^5.0.5",
 		"rxjs": "^7.8.1",
-		"typeorm": "0.3.20aws eks update-kubeconfig --region",
+		"typeorm": "0.3.20",
 		"underscore": "^1.13.6"
 	},
 	"devDependencies": {
