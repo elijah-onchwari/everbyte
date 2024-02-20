@@ -1,4 +1,4 @@
-name: Api [DEV]
+name: Backend CI [dev]
 
 on:
     push:
