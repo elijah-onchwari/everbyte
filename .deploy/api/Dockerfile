@@ -27,6 +27,9 @@ FROM node:20-alpine3.16 AS devDependencies
 LABEL maintainer="Elijah Onchwari <elijah@everbyte.co>" \
       description="Everbyte project" \
       vendor="Everbyte Inc." 
+#debug
+RUN node -v
+RUN npm -v
 
 RUN apk add --no-cache --virtual .gyp python3 make g++ \
     && npm install npm@latest -g \
@@ -60,6 +63,9 @@ RUN yarn install --network-timeout 1000000 --frozen-lockfile && yarn cache clean
 ############################### PROD DEPENDENCIES ###################################################
 #####################################################################################################
 FROM node:20-alpine3.16 AS prodDependencies
+#debug
+RUN node -v
+RUN npm -v
 
 RUN npm install npm@latest -g \
     && npm install yarn -g --force \
