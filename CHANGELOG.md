@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/elijah-onchwari/everbyte/compare/v0.1.3...v0.1.4) (2024-02-20)
+
+
+### Bug Fixes
+
+* Docker push command in workflow ([50df29b](https://github.com/elijah-onchwari/everbyte/commit/50df29b489b66fae3d66b898cf269e86d215a43d))
+
 ## [0.1.3](https://github.com/elijah-onchwari/everbyte/compare/v0.1.2...v0.1.3) (2024-02-20)
 
 
