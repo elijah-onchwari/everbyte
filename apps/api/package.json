@@ -27,13 +27,13 @@
   },
   "dependencies": {
     "@everbyte/core": "^0.0.0",
-    "dotenv": "^16.3.1",
-    "yargs": "^17.6.2"
+    "dotenv": "^16.4.4",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@nestjs/schematics": "^10.0.1",
-    "@nestjs/testing": "^10.0.5",
-    "ts-node": "^10.9.1",
-    "typescript": "5.1.6"
+    "@nestjs/schematics": "^10.1.1",
+    "@nestjs/testing": "^10.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "5.3.3"
   }
 }

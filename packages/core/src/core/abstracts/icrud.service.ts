@@ -16,22 +16,16 @@ export interface ICrudService<T> {
 	findAll(filter?: FindManyOptions<T>): Promise<IPagination<T>>;
 	paginate(filter?: FindManyOptions<T>): Promise<IPagination<T>>;
 	findOneByIdString(id: string, options?: FindOneOptions<T>): Promise<T>;
-	findOneOrFailByIdString(
-		id: string,
-		options?: FindOneOptions<T>
-	): Promise<ITryRequest<T>>;
-	findOneByOptions(options: FindOneOptions<T>): Promise<T>;
+	findOneOrFailByIdString(id: string, options?:FindOneOptions<T>): Promise<ITryRequest<T>>;
+	findOneByOptions(options:FindOneOptions<T>): Promise<T>;
 	findOneByWhereOptions(options: FindOptionsWhere<T>): Promise<T>;
 	findOneOrFailByOptions(options: FindOneOptions<T>): Promise<ITryRequest<T>>;
-	findOneOrFailByWhereOptions(
-		options: FindOptionsWhere<T>
-	): Promise<ITryRequest<T>>;
-	create(entity: DeepPartial<T>, ...options: any[]): Promise<T>;
-	save(entity: DeepPartial<T>): Promise<T>;
-	update(
-		id: any,
-		entity: QueryDeepPartialEntity<T>,
-		...options: any[]
-	): Promise<UpdateResult | T>;
-	delete(id: any, ...options: any[]): Promise<DeleteResult>;
+	findOneOrFailByWhereOptions(options: FindOptionsWhere<T>): Promise<ITryRequest<T>>;
+	create(entity: DeepPartial<T> , ...options: any[]): Promise<T>;
+	save(entity: DeepPartial<T> ): Promise<T>;
+	update(id: IUpdateCriteria<T>, entity: QueryDeepPartialEntity<T>, ...options: any[]): Promise<UpdateResult | T>;
+	delete(id: IDeleteCriteria<T>, ...options: any[]): Promise<DeleteResult>;
 }
+
+export type IUpdateCriteria<T> = string | number | FindOptionsWhere<T> 
+export type IDeleteCriteria<T> = string | number | FindOptionsWhere<T>

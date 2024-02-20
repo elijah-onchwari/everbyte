@@ -36,11 +36,11 @@ export abstract class CrudController<T extends BaseEntity> {
 		description: 'Found records count'
 	})
 	@Get('count')
-	async getCount(
-		@Query() options?: FindOptionsWhere<T>
+    async getCount(
+		@Query() options?: FindOptionsWhere<T>,
 	): Promise<number | void> {
-		return await this.crudService.countBy(options);
-	}
+        return await this.crudService.countBy(options);
+    }
 
 	@ApiOperation({ summary: 'Find all records using pagination' })
 	@ApiResponse({

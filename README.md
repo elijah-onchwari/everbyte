@@ -23,3 +23,14 @@
 -   Run both API and UI with a single command: `yarn start`.
 -   Open Everbyte UI on <http://localhost:4200> in your browser (API runs on <http://localhost:3000/api>).
 
+## Update packages locally 
+```
+npm install -g npm-check-updates
+npm-check-updates -u --interactive --format group
+```
+
+## Local Cluster Setup
+Run this command on macbook
+```
+bash utils/install-cluster.sh
+```

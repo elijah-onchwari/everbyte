@@ -64,3 +64,4 @@ ormlogs.log
 /apps/api/*.tsbuildinfo
 
 .angular
+.nx/

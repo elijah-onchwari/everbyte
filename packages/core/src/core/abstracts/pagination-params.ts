@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { FindOptionsOrder, FindOptionsRelations, FindOptionsSelect, FindOptionsWhereProperty } from 'typeorm';
+import { FindOptionsOrder, FindOptionsRelations, FindOptionsSelect, FindOptionsWhere, FindOptionsWhereProperty } from 'typeorm';
 import { Transform, TransformFnParams } from 'class-transformer';
 import { IsNotEmpty, IsOptional, Max, Min, ValidateNested } from 'class-validator';
 import { isClassInstance, isObject, parseToBoolean } from '@everbyte/common';
@@ -7,7 +7,7 @@ import { isClassInstance, isObject, parseToBoolean } from '@everbyte/common';
 /**
  * Specifies what columns should be retrieved.
  */
-export abstract class OptionsSelect<T = any> {
+export class OptionsSelect<T = any> {
 
 	@ApiPropertyOptional({ type: 'object' })
 	@IsOptional()
@@ -18,14 +18,14 @@ export abstract class OptionsSelect<T = any> {
 /**
  * Indicates what relations of entity should be loaded (simplified left join form).
 */
-export abstract class OptionsRelations<T = any> extends OptionsSelect<T> {
+export class OptionsRelations<T = any> extends OptionsSelect<T> {
 
 	@ApiPropertyOptional({ type: 'object' })
 	@IsOptional()
 	readonly relations?: FindOptionsRelations<T>;
 }
 
-export abstract class OptionParams<T> extends OptionsRelations<T> {
+export class OptionParams<T> extends OptionsRelations<T> {
 	/**
 	 * Order, in which entities should be ordered.
 	 */
@@ -34,15 +34,14 @@ export abstract class OptionParams<T> extends OptionsRelations<T> {
 	readonly order: FindOptionsOrder<T>;
 
 	/**
-     * Simple condition that should be applied to match entities.
-     */
+	 * Simple condition that should be applied to match entities.
+	 */
 	@ApiProperty({ type: 'object' })
 	@IsNotEmpty()
 	@ValidateNested({ each: true })
 	// @Type(() => TenantOrganizationBaseDTO)
-	readonly where: {
-		[P in keyof T]?: FindOptionsWhereProperty<NonNullable<T[P]>>;
-	};
+	// @Transform(({ value }: TransformFnParams) => value ? escapeQueryWithParameters(value) : {})
+	readonly where: FindOptionsWhere<T>;
 
 	/**
 	* Indicates if soft-deleted rows should be included in entity result.
@@ -50,31 +49,31 @@ export abstract class OptionParams<T> extends OptionsRelations<T> {
 	@ApiPropertyOptional({ type: 'boolean' })
 	@IsOptional()
 	@Transform(({ value }: TransformFnParams) => value ? parseToBoolean(value) : false)
-	readonly withDeleted?: boolean;
+	readonly withDeleted: boolean;
 }
 
 /**
  * Describes generic pagination params
  */
-export abstract class PaginationParams<T = any> extends OptionParams<T>{
+export class PaginationParams<T = any> extends OptionParams<T> {
 	/**
-     * Limit (paginated) - max number of entities should be taken.
-     */
+	 * Limit (paginated) - max number of entities should be taken.
+	 */
 	@ApiPropertyOptional({ type: () => 'number', minimum: 0, maximum: 100 })
 	@IsOptional()
 	@Min(0)
 	@Max(100)
 	@Transform((params: TransformFnParams) => parseInt(params.value, 10))
-	readonly take: number = 10;
+	readonly take: number;
 
 	/**
-     * Offset (paginated) where from entities should be taken.
-     */
+	 * Offset (paginated) where from entities should be taken.
+	 */
 	@ApiPropertyOptional({ type: () => 'number', minimum: 0 })
 	@IsOptional()
 	@Min(0)
 	@Transform((params: TransformFnParams) => parseInt(params.value, 10))
-	readonly skip: number = 0;
+	readonly skip: number;
 }
 
 /**
