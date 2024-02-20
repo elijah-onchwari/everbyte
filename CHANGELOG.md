@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/elijah-onchwari/everbyte/compare/v0.1.4...v0.1.5) (2024-02-20)
+
+
+### Bug Fixes
+
+* Commented out push in deployment step ([4834dc6](https://github.com/elijah-onchwari/everbyte/commit/4834dc6021cc1344851116d6b2cd6276bf34305f))
+
 ## [0.1.4](https://github.com/elijah-onchwari/everbyte/compare/v0.1.3...v0.1.4) (2024-02-20)
 
 
