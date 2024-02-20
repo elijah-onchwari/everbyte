@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/elijah-onchwari/everbyte/compare/v0.1.6...v0.1.7) (2024-02-20)
+
+
+### Bug Fixes
+
+* Remove branch restriction for push event in backend CI workflow ([39ee0cd](https://github.com/elijah-onchwari/everbyte/commit/39ee0cd9609a980fc0d10a7a1828ea7b7af70c95))
+
 ## [0.1.6](https://github.com/elijah-onchwari/everbyte/compare/v0.1.5...v0.1.6) (2024-02-20)
 
 
