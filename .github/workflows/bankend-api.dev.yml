@@ -56,7 +56,7 @@ jobs:
             load: true
             platforms: linux/amd64
             tags: |
-                ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
+                ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
                 ${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
             cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
             cache-to: type=inline
@@ -67,5 +67,5 @@ jobs:
 
       - name: Push to Github Registry
         run: |
-            docker push ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
+            docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
 
