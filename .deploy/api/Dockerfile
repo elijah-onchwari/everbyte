@@ -29,7 +29,7 @@ LABEL maintainer="Elijah Onchwari <elijah@everbyte.co>" \
       vendor="Everbyte Inc." 
 
 RUN apk add --no-cache --virtual .gyp python3 make g++ \
-    && npm i --location=global npm \
+    && npm install npm@latest -g \
     && npm install yarn -g --force \
     && mkdir /srv/everbyte && chown -R node:node /srv/everbyte
 
@@ -61,7 +61,7 @@ RUN yarn install --network-timeout 1000000 --frozen-lockfile && yarn cache clean
 #####################################################################################################
 FROM node:20-alpine3.16 AS prodDependencies
 
-RUN npm i -g npm \
+RUN npm install npm@latest -g \
     && npm install yarn -g --force \
     && mkdir /srv/everbyte && chown -R node:node /srv/everbyte
 
