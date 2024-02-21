@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.8](https://github.com/elijah-onchwari/everbyte/compare/v0.1.7...v0.1.8) (2024-02-21)
+
+
+### Bug Fixes
+
+* Update Dockerfile configuration ([5c50d43](https://github.com/elijah-onchwari/everbyte/commit/5c50d430ff11fdc0e11075d962dad10eaab615ea))
+
 ## [0.1.7](https://github.com/elijah-onchwari/everbyte/compare/v0.1.6...v0.1.7) (2024-02-20)
 
 
