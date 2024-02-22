@@ -1,34 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, HttpStatus,UsePipes, ValidationPipe } from '@nestjs/common';
 import { CompanyService } from './company.service';
-import { CreateCompanyDto } from './dto/create-company.dto';
-import { UpdateCompanyDto } from './dto/update-company.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateCompanyDto, ICompany } from './dto/company.dto';
 
-@Controller('company')
+@ApiTags('Company')
+@Controller()
 export class CompanyController {
-  constructor(private readonly companyService: CompanyService) {}
+  constructor(private readonly companyService: CompanyService) { }
 
+  /**
+   * CREATE Owner Company
+   *
+   * @returns
+   */
+  @ApiOperation({
+    summary: 'Create new Company. The user who creates the company is given the super admin role.',
+    security: [
+      {
+        role: ['SUPER_ADMIN']
+      }
+    ]
+  })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'The record has been successfully created.'
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid input, The response body may contain clues as to what went wrong'
+  })
   @Post()
-  create(@Body() createCompanyDto: CreateCompanyDto) {
-    return this.companyService.create(createCompanyDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.companyService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.companyService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
-    return this.companyService.update(+id, updateCompanyDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.companyService.remove(+id);
+  @UsePipes(new ValidationPipe())
+  async createCompany(@Body() dto: CreateCompanyDto): Promise<ICompany> {
+    return await this.companyService.createCompany(dto);
   }
 }

@@ -10,8 +10,6 @@ import {
 } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import  moment from 'moment';
-import { of as observableOf, throwError } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
 import { IPagination } from '@everbyte/contracts';
 import { BaseEntity } from '@database/entities/base.entity';
 import { ICrudService } from './icrud.service';
@@ -381,25 +379,5 @@ export abstract class CrudService<T extends BaseEntity>
 			console.log(error);
 			throw new NotFoundException(`The record was not found`, error);
 		}
-	}
-
-	/**
-	 * e.g., findOneById(id).pipe(map(entity => entity.id), entityNotFound())
-	 */
-	private entityNotFound() {
-		return (stream$) =>
-			stream$.pipe(
-				mergeMap((signal) => {
-					if (!signal) {
-						return throwError(
-							() =>
-								new NotFoundException(
-									`The requested record was not found`
-								)
-						);
-					}
-					return observableOf(signal);
-				})
-			);
 	}
 }

@@ -17,6 +17,8 @@ import { SharedModule } from './shared/shared.module';
 import { CompanyModule } from './modules/company/company.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { TransformInterceptor } from '@core/interceptors/transform.interceptor';
 
 @Module({
 	imports: [
@@ -47,6 +49,12 @@ import { DataSource } from 'typeorm';
 		})
 	],
 	controllers: [AppController],
-	providers: [AppService]
+	providers: [
+		AppService,
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: TransformInterceptor
+		}
+	]
 })
 export class AppModule {}
