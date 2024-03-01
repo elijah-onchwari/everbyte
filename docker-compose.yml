@@ -1,102 +1,100 @@
 version: '3.8'
 
 services:
-    db:
-        image: postgres:16-alpine
-        container_name: db_everbyte
-        restart: always
-        environment:
-            POSTGRES_DB: ${DB_NAME:-everbyte}
-            POSTGRES_USER: ${DB_USER:-postgres}
-            POSTGRES_PASSWORD: ${DB_PASS:-postgres}
-        healthcheck:
-            test:
-                [
-                    'CMD-SHELL',
-                    'psql postgres://$${POSTGRES_USER}:$${POSTGRES_PASSWORD}@localhost:5432/$${POSTGRES_DB} || exit 1'
-                ]
-        volumes:
-            - postgres_data:/var/lib/postgresql/data/
-            - ./.deploy/db/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
-        ports:
-            - '5432:5432'
-        networks:
-            - public
+  db:
+    image: postgres:16-alpine
+    container_name: db_everbyte
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-everbyte}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASS:-postgres}
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'psql postgres://$${POSTGRES_USER}:$${POSTGRES_PASSWORD}@localhost:5432/$${POSTGRES_DB} || exit 1',
+        ]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./.deploy/db/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+    ports:
+      - '5432:5432'
+    networks:
+      - public
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis_everbyte
+    restart: unless-stopped
+    ports:
+      - '6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - public
 
-    redis:
-        image: redis:7-alpine
-        container_name: redis_everbyte
-        restart: unless-stopped
-        ports:
-            - "6379"
-        volumes:
-            - redis_data:/data
-        networks:
-            - public
+  pgweb:
+    image: sosedoff/pgweb
+    container_name: pgweb_everbyte
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db:${TYPEORM_HOST:-db}
+    environment:
+      POSTGRES_DB: ${DB_NAME:-everbyte}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASS:-postgres}
+      PGWEB_DATABASE_URL: postgres://${DB_USER:-postgres}:${DB_PASS:-postgres}@${TYPEORM_HOST:-db}:${DB_PORT:-5432}/${DB_NAME:-everbyte}?sslmode=disable
+    ports:
+      - '8081:8081'
+    networks:
+      - public
 
-
-    pgweb:
-        image: sosedoff/pgweb
-        container_name: pgweb_everbyte
-        restart: always
-        depends_on:
-            - db
-        links:
-            - db:${TYPEORM_HOST:-db}
-        environment:
-            POSTGRES_DB: ${DB_NAME:-everbyte}
-            POSTGRES_USER: ${DB_USER:-postgres}
-            POSTGRES_PASSWORD: ${DB_PASS:-postgres}
-            PGWEB_DATABASE_URL: postgres://${DB_USER:-postgres}:${DB_PASS:-postgres}@${TYPEORM_HOST:-db}:${DB_PORT:-5432}/${DB_NAME:-everbyte}?sslmode=disable
-        ports:
-            - '8081:8081'
-        networks:
-            - public
-
-    # api:
-    #     container_name: api_everbyte
-    #     image: everbyte-api:latest
-    #     build:
-    #         context: .
-    #         # target: productions
-    #         target: development
-    #         dockerfile: .deploy/api/Dockerfile
-    #         args:
-    #             NODE_ENV: ${NODE_ENV:-development}
-    #             APP_URL: ${APP_URL:-http://localhost:3000}
-    #             CLIENT_URL: ${CLIENT_URL:-http://localhost:4200}
-    #     environment:
-    #         PORT: ${PORT:-3000}
-    #         NODE_ENV: ${NODE_ENV:-development}
-    #         TYPEORM_HOST: db
-    #         APP_URL: ${APP_URL:-http://localhost:3000}
-    #         CLIENT_URL: ${CLIENT_URL:-http://localhost:4200}
-    #     # section enables the data to be persisted and is what makes the hot reloading possible.
-    #     volumes:
-    #         - .:/srv/everbyte
-    #     env_file:
-    #         - .env.docker.compose
-    #     entrypoint: ['/bin/sh','entrypoint.compose.sh']
-    #     # command: ['node', 'main.js']
-    #     command: yarn start:api:core
-    #     restart: on-failure
-    #     depends_on:
-    #         db:
-    #             condition: service_healthy
-    #         redis:
-    #             condition: service_started
-    #     links:
-    #         - db:${TYPEORM_HOST:-db}
-    #         - redis:${REDIS_HOST:-redis}
-    #     ports:
-    #         - '3000:${API_PORT:-3000}'
-    #     networks:
-    #         - public
+  # api:
+  #     container_name: api_everbyte
+  #     image: everbyte-api:latest
+  #     build:
+  #         context: .
+  #         # target: productions
+  #         target: development
+  #         dockerfile: .deploy/api/Dockerfile
+  #         args:
+  #             NODE_ENV: ${NODE_ENV:-development}
+  #             APP_URL: ${APP_URL:-http://localhost:3000}
+  #             CLIENT_URL: ${CLIENT_URL:-http://localhost:4200}
+  #     environment:
+  #         PORT: ${PORT:-3000}
+  #         NODE_ENV: ${NODE_ENV:-development}
+  #         TYPEORM_HOST: db
+  #         APP_URL: ${APP_URL:-http://localhost:3000}
+  #         CLIENT_URL: ${CLIENT_URL:-http://localhost:4200}
+  #     # section enables the data to be persisted and is what makes the hot reloading possible.
+  #     volumes:
+  #         - .:/srv/everbyte
+  #     env_file:
+  #         - .env.docker.compose
+  #     entrypoint: ['/bin/sh','entrypoint.compose.sh']
+  #     # command: ['node', 'main.js']
+  #     command: yarn start:api:core
+  #     restart: on-failure
+  #     depends_on:
+  #         db:
+  #             condition: service_healthy
+  #         redis:
+  #             condition: service_started
+  #     links:
+  #         - db:${TYPEORM_HOST:-db}
+  #         - redis:${REDIS_HOST:-redis}
+  #     ports:
+  #         - '3000:${API_PORT:-3000}'
+  #     networks:
+  #         - public
 
 volumes:
-    redis_data: {}
-    postgres_data: {}
+  redis_data: {}
+  postgres_data: {}
 
 networks:
   public:
@@ -104,5 +102,5 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 10.1.10.0/24
-        gateway: 10.1.10.1                   
+        - subnet: 10.1.10.0/24
+          gateway: 10.1.10.1

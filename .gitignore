@@ -1,16 +1,12 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
-/tmp
+dist
+tmp
 /out-tsc
 
 # dependencies
-node_modules/
-
-# sqlite3 database
-*.sqlite3
-*.sqlite3-journal
+node_modules
 
 # IDEs and editors
 /.idea
@@ -29,14 +25,12 @@ node_modules/
 !.vscode/extensions.json
 
 # misc
-/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
-lerna-debug.log
 testem.log
 /typings
 
@@ -44,24 +38,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-.env
-
-# Typeorm Logs
-ormlogs.log
- 
-# Cache File
-/.cache
-/apps/**/.cache
-/packages/**/.cache
-/packages/**/dist
-
-/.deploy/nginx/log
-/apps/everbyte/src/environments/environment.prod.ts
-/apps/everbyte/src/environments/environment.ts
-
-/export
-/import
-/apps/api/*.tsbuildinfo
-
-.angular
-.nx/
+.nx/cache
