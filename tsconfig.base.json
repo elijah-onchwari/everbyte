@@ -15,15 +15,15 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@everbyte/common": ["packages/worskspace-common/src/index.ts"],
-      "@everbyte/config": ["packages/worskspace-configs/src/index.ts"],
-      "@everbyte/contracts": ["packages/worskspace-contracts/src/index.ts"],
-      "@everbyte/core": ["packages/worskspace-core/src/index.ts"],
-      "@everbyte/database": ["packages/worskspace-database/src/index.ts"],
-      "@everbyte/modules": ["packages/worskspace-modules/src/index.ts"],
-      "@everbyte/shared": ["packages/worskspace-shared/src/index.ts"],
-      "@everbyte/api": ["packages/workflow-api/src/index.ts"],
-      "@everbyte/data": ["packages/worskspace-data/src/index.ts"]
+      "@workflow/api": ["packages/workflow-api/src/index.ts"],
+      "@workflow/common": ["packages/workflow-common/src/index.ts"],
+      "@workflow/config": ["packages/workflow-config/src/index.ts"],
+      "@everbyte/contracts": ["packages/workflow-contracts/src/index.ts"],
+      "@workflow/core": ["packages/workflow-core/src/index.ts"],
+      "@workflow/data": ["packages/workflow-data/src/index.ts"],
+      "@workflow/database": ["packages/workflow-database/src/index.ts"],
+      "@workflow/modules": ["packages/workflow-modules/src/index.ts"],
+      "@everbyte/shared": ["packages/workflow-shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

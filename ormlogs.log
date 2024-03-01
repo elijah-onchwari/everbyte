@@ -20,3 +20,10 @@
 [2024-03-01T07:39:04.964Z][QUERY]: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'migrations'
 [2024-03-01T07:39:04.979Z][QUERY]: SELECT * FROM "migrations" "migrations" ORDER BY "id" DESC
 [2024-03-01T07:39:04.982Z]No migrations are pending
+[2024-03-01T08:17:50.460Z][QUERY]: SELECT * FROM current_schema()
+[2024-03-01T08:17:50.481Z][INFO]: No classes were found using the provided glob pattern:  "/Users/ely/Desktop/everbyte/dist/apps/everbyte/database/migrations/migrations/*{.ts,.js}"
+[2024-03-01T08:17:50.481Z][QUERY]: CREATE EXTENSION IF NOT EXISTS "pgcrypto"
+[2024-03-01T08:17:50.485Z][QUERY]: SELECT version();
+[2024-03-01T08:17:50.486Z][QUERY]: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'migrations'
+[2024-03-01T08:17:50.500Z][QUERY]: SELECT * FROM "migrations" "migrations" ORDER BY "id" DESC
+[2024-03-01T08:17:50.502Z]No migrations are pending

@@ -1,0 +1,8 @@
+{
+  "name": "workflow-core",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/workflow-core/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": []
+}

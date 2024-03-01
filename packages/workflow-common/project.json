@@ -1,0 +1,8 @@
+{
+  "name": "workflow-common",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/workflow-common/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": []
+}

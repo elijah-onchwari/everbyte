@@ -1,6 +1,6 @@
-import { bootstrap } from '@everbyte/api';
+import { bootstrap } from '@workflow/api';
 
 bootstrap().catch((error) => {
-	console.log(error);
-	process.exit(1);
+  console.log(error);
+  process.exit(1);
 });

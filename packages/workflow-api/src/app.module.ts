@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule, ConfigService } from '@everbyte/config';
+import { ConfigModule, ConfigService } from '@workflow/config';
 import {
   UserModule,
   CompanyModule,
@@ -14,10 +14,10 @@ import {
   RolePermissionModule,
   UserCompanyModule,
   UserRoleModule,
-} from '@everbyte/modules';
+} from '@workflow/modules';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { CoreModule } from '@everbyte/core';
+import { CoreModule } from '@workflow/core';
 
 @Module({
   imports: [

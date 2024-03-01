@@ -1,8 +1,0 @@
-{
-  "name": "worskspace-modules",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/worskspace-modules/src",
-  "projectType": "library",
-  "targets": {},
-  "tags": []
-}
