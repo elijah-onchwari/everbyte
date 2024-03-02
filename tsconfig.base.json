@@ -6,11 +6,13 @@
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
+    "outDir": "./dist/out-tsc",
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "target": "ES2022",
+    "module": "commonjs",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2020", "dom", "es2018", "esnext.array"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -24,7 +26,14 @@
       "@workflow/database": ["packages/workflow-database/src/index.ts"],
       "@workflow/modules": ["packages/workflow-modules/src/index.ts"],
       "@everbyte/shared": ["packages/workflow-shared/src/index.ts"]
-    }
+    },
+    "resolveJsonModule": true,
+    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false,
+    "noImplicitAny": false,
+    "esModuleInterop": false,
+    "useDefineForClassFields": false
   },
   "exclude": ["node_modules", "tmp"]
 }

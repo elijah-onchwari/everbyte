@@ -10,9 +10,9 @@ import {
 import { Logger, Type } from '@nestjs/common';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import * as path from 'path';
 import { EntitySchema, EntitySubscriberInterface } from 'typeorm';
 import { coreEntities, coreSubscribers } from '@workflow/database';
+import { join } from 'path';
 export async function bootstrap() {
   await updateConfigs();
   const app = await NestFactory.create(AppModule);
@@ -78,28 +78,9 @@ export function getMigrationsPaths() {
   console.log('[Current directory process.cwd()]:', process.cwd());
 
   return {
-    migrations: [
-      path.join(__dirname, '/database/migrations/migrations/*{.ts,.js}'),
-    ],
+    migrations: [join(__dirname, '/database/migrations/migrations/*{.ts,.js}')],
     cli: {
-      migrationsDir: path.join(
-        __dirname,
-        '../src/database/migrations/migrations'
-      ),
+      migrationsDir: join(__dirname, '../database/migrations/migrations'),
     },
   };
-  // return {
-  // 	migrations: [
-  // 		join(
-  // 			process.cwd(),
-  // 			'/packages/core/src/database/migrations/migrations/*{.ts,.js}}'
-  // 		)
-  // 	],
-  // 	cli: {
-  // 		migrationsDir: join(
-  // 			process.cwd(),
-  // 			'/packages/core/src/database/migrations/migrations'
-  // 		)
-  // 	}
-  // };
 }

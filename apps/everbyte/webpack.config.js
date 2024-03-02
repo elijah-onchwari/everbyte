@@ -14,6 +14,9 @@ module.exports = {
       // assets: ['./src/assets'],
       optimization: false,
       outputHashing: 'none',
+      sourceMap: true,
+      externalDependencies:'all'
+
     }),
   ],
 };

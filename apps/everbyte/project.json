@@ -8,7 +8,8 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "everbyte:build"
+        "buildTarget": "everbyte:build",
+        "webpackConfig": "apps/everbyte/webpack.config.js"
       },
       "configurations": {
         "development": {
