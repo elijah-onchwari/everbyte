@@ -5,11 +5,19 @@
   "projectType": "application",
   "targets": {
     "serve": {
-      "executor": "@nx/js:node",
+      "executor": "@nx/webpack:webpack",
       "defaultConfiguration": "development",
+      "outputs": ["{options.outputPath}"],
       "options": {
         "buildTarget": "everbyte:build",
-        "webpackConfig": "apps/everbyte/webpack.config.js"
+        "webpackConfig": "apps/everbyte/webpack.config.js",
+        "outputPath": "dist/apps/everbyte",
+        "sourceMap": true,
+        "target": "web",
+        "compiler": "tsc",
+        "debug": true,
+        "watch": true,
+        "commonChunk": true
       },
       "configurations": {
         "development": {
