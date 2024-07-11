@@ -11,7 +11,7 @@ import {
   SignInRequest,
   SignUpRequest,
 } from '@everbyte/contracts';
-import * as bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { JwtPayload, sign, verify } from 'jsonwebtoken';
 import { environment } from '@workflow/config';
 import { UserEmail, UserToken } from '@everbyte/contracts';
@@ -298,7 +298,7 @@ export class AuthService {
         throw new UnauthorizedException();
       }
 
-      let payload: JwtPayload | string = this.verifyToken(token);
+      const payload: JwtPayload | string = this.verifyToken(token);
       if (typeof payload === 'object') {
         const { userId, tenantId, code } = payload;
         const user = await this.userRepository.findOneOrFail({

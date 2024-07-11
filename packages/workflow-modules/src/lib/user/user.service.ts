@@ -6,7 +6,7 @@ import {
   SelectQueryBuilder,
   WhereExpressionBuilder,
 } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { JwtPayload } from 'jsonwebtoken';
 import { isNotEmpty } from 'class-validator';
 import { User } from '@workflow/data';

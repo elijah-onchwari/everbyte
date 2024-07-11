@@ -11,13 +11,7 @@
       "options": {
         "buildTarget": "everbyte:build",
         "webpackConfig": "apps/everbyte/webpack.config.js",
-        "outputPath": "dist/apps/everbyte",
-        "sourceMap": true,
-        "target": "web",
-        "compiler": "tsc",
-        "debug": true,
-        "watch": true,
-        "commonChunk": true
+        "outputPath": "dist/apps/everbyte"
       },
       "configurations": {
         "development": {
