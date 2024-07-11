@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.9](https://github.com/elijah-onchwari/everbyte/compare/v0.1.8...v0.1.9) (2024-07-11)
+
+
+### Features
+
+* Add company module and repository, update company service ([a1e6d39](https://github.com/elijah-onchwari/everbyte/commit/a1e6d39529d2de21a7ef71aefd8eb80c49ab13a4))
+
 ## [0.1.8](https://github.com/elijah-onchwari/everbyte/compare/v0.1.7...v0.1.8) (2024-02-21)
 
 
